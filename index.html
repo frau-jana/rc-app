@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReConnect App Style Guide</title>
+  <meta name="description" content="Browser-ready operational style guide for the ReConnect app." />
+  <style>
+    :root {
+      --bg: #fbfbfd;
+      --surface: #ffffff;
+      --surface-alt: #f3f0fa;
+      --surface-soft: #f8f8fc;
+      --text: #190a5a;
+      --text-body: #1f2430;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --primary: #5538d6;
+      --accent: #affc41;
+      --shadow: 0 12px 30px rgba(25, 10, 90, 0.08);
+      --radius: 18px;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, #f7f7fc 0%, #fbfbfd 100%);
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+    a { color: var(--primary); }
+    img { max-width: 100%; display: block; }
+
+    .page {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #190a5a 0%, #5538d6 62%, #6e52ef 100%);
+      color: #fff;
+      border-radius: 28px;
+      padding: 42px 34px;
+      box-shadow: 0 24px 60px rgba(85, 56, 214, 0.18);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -60px;
+      top: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(175,252,65,.35) 0%, rgba(175,252,65,0) 70%);
+      pointer-events: none;
+    }
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      margin-bottom: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+    .hero h1, .hero p { color: #fff; }
+    h1, h2, h3 { color: var(--text); line-height: 1.15; margin: 0 0 12px; }
+    h1 { font-size: 42px; letter-spacing: -.03em; max-width: 12ch; }
+    h2 {
+      font-size: 30px;
+      margin-top: 42px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    h3 { font-size: 21px; margin-top: 30px; }
+    p { margin: 0 0 14px; }
+    ul { margin: 0 0 16px 20px; }
+    li { margin-bottom: 8px; }
+    code {
+      background: #f4f4f8;
+      border: 1px solid #e7e7ef;
+      border-radius: 8px;
+      padding: 2px 6px;
+      font-size: .95em;
+    }
+
+    .card, .toc {
+      background: rgba(255,255,255,.9);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(229,231,235,.9);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .toc { margin-bottom: 24px; }
+    .toc ul { list-style: none; margin: 0; padding: 0; columns: 2; }
+    .toc li { margin-bottom: 6px; }
+
+    .note {
+      background: #fcffef;
+      border-left: 5px solid var(--accent);
+      padding: 16px 18px;
+      border-radius: 12px;
+      margin: 18px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      vertical-align: top;
+      text-align: left;
+    }
+    th:last-child, td:last-child { border-right: none; }
+    tr:last-child td { border-bottom: none; }
+    th { background: var(--surface-alt); color: var(--text); font-size: 14px; }
+
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin: 18px 0 24px;
+    }
+    .swatch {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .swatch-color {
+      height: 92px;
+      border-bottom: 1px solid rgba(255,255,255,.25);
+    }
+    .swatch-info { padding: 14px; }
+    .swatch-name {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .swatch-code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--muted); font-size: 13px; }
+
+    .mini-ui {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin: 18px 0 8px;
+    }
+    .mock {
+      background: linear-gradient(180deg, #ffffff 0%, #fafafe 100%);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      min-height: 170px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mock h4 {
+      margin: 0 0 12px;
+      color: var(--text);
+      font-size: 16px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #f3f0fa;
+      color: #5538d6;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 138px;
+      height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(85,56,214,.22);
+    }
+    .searchbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      height: 44px;
+      padding: 0 14px;
+      color: #8E8E93;
+    }
+    .searchbar::before {
+      content: "🔎";
+      font-size: 16px;
+      color: #8E8E93;
+    }
+    .component-preview .searchbar {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .component-preview .btn-primary {
+      margin: 0 auto;
+    }
+    .component-preview .cat-row {
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .component-preview .map-mock {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .component-preview .figma-event-card {
+      margin: 0 auto;
+    }
+    .component-preview .pill {
+      margin-bottom: 8px;
+    }
+    .cat-row { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cat {
+      width: 72px;
+      text-align: center;
+      font-size: 12px;
+      color: var(--text);
+    }
+    .cat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin: 0 auto 8px;
+      background: #f3f0fa;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      color: var(--primary);
+      border: 1px solid rgba(85,56,214,.12);
+    }
+    .event-card {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .event-thumb {
+      height: 86px;
+      background: linear-gradient(135deg, #8b79f6, #5538d6 60%, #190a5a);
+      position: relative;
+    }
+    .event-thumb::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.08) 100%);
+    }
+    .event-body { padding: 14px; }
+    .event-title { font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .meta { font-size: 13px; color: var(--muted); }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .component-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .component-preview {
+      background: linear-gradient(180deg, #fbfbfd 0%, #f3f0fa 100%);
+      padding: 18px;
+      min-height: 220px;
+      height: 220px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .component-content { padding: 18px; }
+    .component-content h4 {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 18px;
+    }
+    .component-content p { font-size: 14px; }
+    .component-list { margin: 10px 0 0 18px; }
+
+    .map-mock {
+      height: 150px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(85,56,214,.16) 0 10px, transparent 11px),
+        radial-gradient(circle at 60% 50%, rgba(85,56,214,.22) 0 10px, transparent 11px),
+        radial-gradient(circle at 75% 28%, rgba(175,252,65,.55) 0 8px, transparent 9px),
+        linear-gradient(0deg, rgba(25,10,90,.06), rgba(25,10,90,.06)),
+        linear-gradient(90deg, transparent 24%, rgba(25,10,90,.08) 25%, rgba(25,10,90,.08) 26%, transparent 27%, transparent 49%, rgba(25,10,90,.08) 50%, rgba(25,10,90,.08) 51%, transparent 52%),
+        linear-gradient(transparent 24%, rgba(25,10,90,.08) 25%, rgba(25,10,90,.08) 26%, transparent 27%, transparent 49%, rgba(25,10,90,.08) 50%, rgba(25,10,90,.08) 51%, transparent 52%),
+        #fff;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .map-pin {
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background: var(--primary);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 4px 10px rgba(85,56,214,.28);
+    }
+    .map-pin::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      top: 5px;
+      left: 5px;
+    }
+    .map-pin.one { left: 26%; top: 40%; }
+    .map-pin.two { left: 58%; top: 54%; }
+    .map-pin.three { left: 72%; top: 30%; }
+
+
+    .figma-event-card {
+      width: 180px;
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 1px 17px rgba(0,0,0,0.08);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .figma-event-card-inner {
+      padding: 12px 12px 10px;
+    }
+    .figma-event-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      color: #190a5a;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+    .figma-event-image {
+      width: 100%;
+      height: 132px;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      background: #f3f0fa;
+    }
+    .figma-event-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .figma-event-title {
+      font-size: 17px;
+      line-height: 1.15;
+      font-weight: 700;
+      color: #190a5a;
+      margin: 0 0 4px;
+    }
+    .figma-event-subtitle {
+      font-size: 12px;
+      line-height: 1.3;
+      color: #190a5a;
+      margin: 0 0 12px;
+    }
+    .figma-event-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #190a5a;
+    }
+    .figma-event-spots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .figma-event-price {
+      font-weight: 500;
+    }
+
+    .footer { margin-top: 48px; color: var(--muted); font-size: 14px; }
+
+    @media (max-width: 860px) {
+      .toc ul { columns: 1; }
+      table { display: block; overflow-x: auto; }
+    }
+    @media (max-width: 760px) {
+      .page { padding: 16px 12px 36px; }
+      .hero { padding: 30px 22px; border-radius: 20px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
+      h3 { font-size: 19px; }
+      .component-grid, .mini-ui, .swatch-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Operational Reference</div>
+      <h1>ReConnect App Style Guide</h1>
+      <p>This browser-ready guide is designed for product, design, development, and QA teams. It is structured so it can be stored as a single HTML file, opened locally in any browser, and uploaded to GitHub without extra dependencies.</p>
+    </section>
+
+    <nav class="toc" aria-label="Table of contents">
+      <h2 style="margin-top:0;padding-top:0;border-top:none;">Contents</h2>
+      <ul>
+        <li><a href="#scope">1. Scope</a></li>
+        <li><a href="#journeys">2. Core Journeys</a></li>
+        <li><a href="#foundations">3. Foundations</a></li>
+        <li><a href="#components">4. Components</a></li>
+        <li><a href="#patterns">5. Screen Patterns</a></li>
+        <li><a href="#handoff">6. Handoff Notes</a></li>
+        <li><a href="#not-covered">7. Not Covered in This Document</a></li>
+      </ul>
+    </nav>
+
+    <section id="scope">
+      <h2>1. Scope</h2>
+      <div class="card">
+        <p>ReConnect Better is a social product designed to help users discover and connect through local events. This guide covers the current visual system, key UI components, major screen patterns, and implementation notes for web and mobile teams.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Product</td>
+              <td>ReConnect Better</td>
+            </tr>
+            <tr>
+              <td>Primary goal</td>
+              <td>Help users discover events, review event details, and decide whether to join or book.</td>
+            </tr>
+            <tr>
+              <td>Main audiences</td>
+              <td>Design, development, and QA teams.</td>
+            </tr>
+            <tr>
+              <td>Platforms mentioned in source</td>
+              <td>Web, iOS, Android.</td>
+            </tr>
+            <tr>
+              <td>Source</td>
+              <td>Figma file</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="journeys">
+      <h2>2. Core Journeys</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Journey</th>
+            <th>User goal</th>
+            <th>Supporting screens</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Event Discovery</td>
+            <td>Find relevant events through categories, search, filters, sorting, and map exploration.</td>
+            <td>Start Page, Search Page List View, Search Page Map View</td>
+            <td>Main entry flow for browsing.</td>
+          </tr>
+          <tr>
+            <td>Event Details</td>
+            <td>Open an event and review enough information to decide whether to join.</td>
+            <td>Event Page</td>
+            <td>Must support decision-making clearly and quickly.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="foundations">
+      <h2>3. Foundations</h2>
+
+      <h3>Brand Colours</h3>
+      <div class="swatch-grid">
+        <div class="swatch"><div class="swatch-color" style="background:#190a5a;"></div><div class="swatch-info"><div class="swatch-name">Main Brand Dark Violet</div><div class="swatch-code">#190a5a</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#5538d6;"></div><div class="swatch-info"><div class="swatch-name">Primary Brand</div><div class="swatch-code">#5538d6</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#affc41;"></div><div class="swatch-info"><div class="swatch-name">Accent Wild Lime</div><div class="swatch-code">#affc41</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#fbfbfd;"></div><div class="swatch-info"><div class="swatch-name">Primary Background</div><div class="swatch-code">#fbfbfd</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#f3f0fa;"></div><div class="swatch-info"><div class="swatch-name">Secondary Background Violet</div><div class="swatch-code">#f3f0fa</div></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#f9fbff;"></div><div class="swatch-info"><div class="swatch-name">Tertiary Background Blue</div><div class="swatch-code">#f9fbff</div></div></div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Value</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Main Brand Dark Violet</td><td><code>#190a5a</code></td><td>Headers, navigation, key UI elements.</td></tr>
+          <tr><td>Primary Brand</td><td><code>#5538d6</code></td><td>Interactive elements and accents.</td></tr>
+          <tr><td>Accent Wild Lime</td><td><code>#affc41</code></td><td>Call-to-action elements and highlights.</td></tr>
+          <tr><td>Primary Background</td><td><code>#fbfbfd</code></td><td>Main app background.</td></tr>
+          <tr><td>Secondary Background Violet</td><td><code>#f3f0fa</code></td><td>Grouped content and alternate surfaces.</td></tr>
+          <tr><td>Tertiary Background Blue</td><td><code>#f9fbff</code></td><td>Additional background variation.</td></tr>
+          <tr><td>Light Gray</td><td><code>#8E8E93</code></td><td>Secondary text and borders.</td></tr>
+          <tr><td>Black 20% Opacity</td><td><code>#00000033</code></td><td>Dividers and subtle shadows.</td></tr>
+          <tr><td>Brand Primary Faded</td><td><code>#f3f0fa</code></td><td>Inactive or secondary elements.</td></tr>
+          <tr><td>Brand CTA Faded</td><td><code>#f6fded</code></td><td>Disabled or secondary CTA states.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Typography</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Style</th>
+            <th>Specification</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Heading 1</td><td>24px, 700, line-height 22px, letter-spacing -0.4px</td><td>Main page titles.</td></tr>
+          <tr><td>Heading 2</td><td>20px, 600, line-height 22px</td><td>Section headers.</td></tr>
+          <tr><td>Heading 3</td><td>16px, 600, line-height 22px</td><td>Card titles and subsections.</td></tr>
+          <tr><td>Body Text (Inter)</td><td>14px, 400, line-height 20px</td><td>Paragraphs and descriptions.</td></tr>
+          <tr><td>Small Text</td><td>12px, 400, line-height 16px</td><td>Captions and metadata.</td></tr>
+          <tr><td>Body Emphasized (SF Pro)</td><td>17px, 590, line-height 22px</td><td>Emphasized native text.</td></tr>
+          <tr><td>Text Mid (SF Pro)</td><td>15px, 590, line-height 22px</td><td>iOS mid-level text.</td></tr>
+          <tr><td>Link</td><td>14px, 400, line-height 22px</td><td>Interactive text links.</td></tr>
+          <tr><td>Footnote</td><td>13px, regular or semibold, line-height 18px</td><td>Fine print.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>UI Glimpse</h3>
+      <div class="mini-ui">
+        <div class="mock">
+          <h4>Primary Action</h4>
+          <div class="btn-primary">Join Event</div>
+        </div>
+        <div class="mock">
+          <h4>Search Entry</h4>
+          <div class="searchbar">Search</div>
+        </div>
+        <div class="mock">
+          <h4>Category Selection</h4>
+          <div class="cat-row">
+            <div class="cat"><div class="cat-icon">♪</div>Music</div>
+            <div class="cat"><div class="cat-icon">🍳</div>Cooking</div>
+            <div class="cat"><div class="cat-icon">⚽</div>Sports</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>Spacing and Effects</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Token</th>
+            <th>Value</th>
+            <th>Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Extra Small</td><td>4px</td><td>Minimal gaps and icon padding.</td></tr>
+          <tr><td>Small</td><td>8px</td><td>Button and input padding.</td></tr>
+          <tr><td>Medium</td><td>16px</td><td>Content blocks.</td></tr>
+          <tr><td>Large</td><td>22px</td><td>Major section spacing.</td></tr>
+          <tr><td>Grid spacing</td><td>83px horizontal / 108px vertical</td><td>Category grid layout.</td></tr>
+          <tr><td>Drop shadow</td><td>0px 1px 17px 0px <code>#00000014</code></td><td>Cards, modals, floating surfaces.</td></tr>
+          <tr><td>Background blur</td><td>50px</td><td>Modal and overlay treatments.</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <strong>Editing tip:</strong> This file uses inline CSS only, so it can open in any modern browser and be uploaded to GitHub as-is.
+      </div>
+    </section>
+
+    <section id="components">
+      <h2>4. Components</h2>
+      <p>Component names are simplified for documentation and handoff. They are shown below without generic labels such as “Component 14”.</p>
+
+      <div class="component-grid">
+        <article class="component-card">
+          <div class="component-preview"><div class="btn-primary">Join Event</div></div>
+          <div class="component-content">
+            <h4>Button</h4>
+            <p>Primary action used for joining an event, submitting a search, or confirming a flow.</p>
+            <ul class="component-list">
+              <li>Required parts: text label, filled background, centered content.</li>
+              <li>States: default, hover, active, disabled.</li>
+              <li>Open question: loading state not documented.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="component-card">
+          <div class="component-preview">
+
+            <div class="figma-event-card">
+              <div class="figma-event-card-inner">
+                <div class="figma-event-top">
+                  <span>22 Jun, Sun</span>
+                  <span>14.30 - 16.30</span>
+                </div>
+                <div class="figma-event-image">
+                  <img src="images/coffee-mugs-pottery-workshop.png" alt="Coffee mugs pottery workshop event" />
+                </div>
+                <div class="figma-event-title">Coffee Mugs Pottery</div>
+                <div class="figma-event-subtitle">Workshop</div>
+                <div class="figma-event-bottom">
+                  <div class="figma-event-spots">
+                    <span>✓</span>
+                    <span>18 spots</span>
+                  </div>
+                  <div class="figma-event-price">€ 15.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-content">
+            <h4>Event Card Small</h4>
+            <p>Compact event preview used in horizontal carousels and quick-browse sections.</p>
+            <ul class="component-list">
+              <li>Required parts: image, title, date, location, brief description.</li>
+              <li>Behavior: horizontal scroll and tap to open event details.</li>
+              <li>Open question: no fallback rules for missing image or long text.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="component-card">
+          <div class="component-preview">
+            <div class="searchbar">Search</div>
+            <div style="height:10px"></div>
+            <span class="pill">Date</span>
+            <span class="pill">Topic</span>
+            <span class="pill">Access</span>
+          </div>
+          <div class="component-content">
+            <h4>Search Field</h4>
+            <p>Main entry point for event search with search text and contextual filtering nearby.</p>
+            <ul class="component-list">
+              <li>Required parts: prefix area, divider, input field, search icon.</li>
+              <li>Behavior: supports typed search and suggestions.</li>
+              <li>Open question: no clear button, validation, or empty query rule.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="component-card">
+          <div class="component-preview">
+            <div class="cat-row">
+              <div class="cat"><div class="cat-icon">💼</div>Business</div>
+              <div class="cat"><div class="cat-icon">🎬</div>Movies</div>
+              <div class="cat"><div class="cat-icon">💻</div>IT Tech</div>
+            </div>
+          </div>
+          <div class="component-content">
+            <h4>Category Card</h4>
+            <p>Interactive category selector used on browse screens and filter-based flows.</p>
+            <ul class="component-list">
+              <li>Required parts: circular icon background, icon, centered label.</li>
+              <li>Behavior: tap to filter events with visible selected feedback.</li>
+              <li>Open question: selected and disabled visual rules are not fully documented.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="component-card">
+          <div class="component-preview">
+            <div class="map-mock">
+              <span class="map-pin one"></span>
+              <span class="map-pin two"></span>
+              <span class="map-pin three"></span>
+            </div>
+          </div>
+          <div class="component-content">
+            <h4>Map View</h4>
+            <p>Map-based browsing surface for events by geography and proximity.</p>
+            <ul class="component-list">
+              <li>Required parts: map viewport, markers, zoom controls.</li>
+              <li>Behavior: pan, zoom, tap markers for event preview.</li>
+              <li>Open question: no empty map, location permission, or clustering rules.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="component-card">
+          <div class="component-preview">
+            <span class="pill">Wheelchair</span>
+            <span class="pill">Elevator</span>
+            <span class="pill">Hearing Aid</span>
+            <span class="pill">Parking</span>
+          </div>
+          <div class="component-content">
+            <h4>Accessibility Indicator</h4>
+            <p>Small icon or badge group used to display accessibility-related event features.</p>
+            <ul class="component-list">
+              <li>Required parts: icons or badges such as handicap, elevator, hearing aid, parking.</li>
+              <li>Behavior: may open tooltip or additional information.</li>
+              <li>Open question: priority and fallback rules are not documented.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="patterns">
+      <h2>5. Screen Patterns</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Pattern</th>
+            <th>Purpose</th>
+            <th>Required blocks</th>
+            <th>Open questions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Start Page</td>
+            <td>Introduce the product and provide fast entry into discovery.</td>
+            <td>Status bar, header, hero section, category grid, event carousel, footer.</td>
+            <td>Entry priority and personalization logic not documented.</td>
+          </tr>
+          <tr>
+            <td>Search Page — List View</td>
+            <td>Help users review results in a structured list.</td>
+            <td>Search field, filter bar, sorting dropdown, event list, map toggle, footer.</td>
+            <td>No empty-result, loading, or network state documented.</td>
+          </tr>
+          <tr>
+            <td>Search Page — Map View</td>
+            <td>Help users discover events by location and proximity.</td>
+            <td>Search field, filter bar, map component, list toggle, footer.</td>
+            <td>No pin clustering or permission fallback documented.</td>
+          </tr>
+          <tr>
+            <td>Event Page</td>
+            <td>Support booking decisions with complete event information.</td>
+            <td>Hero image, title, organizer, share, date/time, location, map link, details, info row, description, CTA.</td>
+            <td>No documented rule for sold-out, unavailable, or expired events.</td>
+          </tr>
+          <tr>
+            <td>3-Column Category Grid</td>
+            <td>Display category cards in a browsable grid.</td>
+            <td>Three columns, wrapped rows, category icons and labels.</td>
+            <td>Responsive scaling beyond base layout not documented.</td>
+          </tr>
+          <tr>
+            <td>Horizontal Event Carousel</td>
+            <td>Enable quick event browsing from the start page.</td>
+            <td>Small cards in a horizontal row with visible overflow.</td>
+            <td>No pagination, snapping, or accessibility rule documented.</td>
+          </tr>
+          <tr>
+            <td>List / Map Toggle</td>
+            <td>Switch between geographic and list-based discovery.</td>
+            <td>Toggle action with “Show Map” / “Show List” logic.</td>
+            <td>Preference persistence not documented.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="handoff">
+      <h2>6. Handoff Notes</h2>
+      <div class="card">
+        <p><strong>iOS</strong>: Notes mention <code>UICollectionView</code> for category grids, <code>UITableView</code> for event lists, SF Pro for native feel, and support for dark mode and dynamic type sizing.</p>
+        <p><strong>Android</strong>: Notes mention <code>RecyclerView</code>, <code>GridLayoutManager</code>, Material Design 3, Jetpack Compose, and support for system dark theme.</p>
+        <p><strong>Cross-platform</strong>: Notes mention responsive design from 320px and up, lazy-loaded images, paginated lists, and WCAG AA compliance.</p>
+        <p><strong>Touch targets</strong>: Minimum touch target guidance is 44px for iOS and 48dp for Android.</p>
+      </div>
+    </section>
+
+    <section id="not-covered">
+      <h2>7. Not Covered in This Document</h2>
+      <div class="card">
+        <p>This section lists the information that is missing or not yet detailed enough for day-to-day product use.</p>
+        <ul>
+          <li>Empty states.</li>
+          <li>Loading states and skeleton screens.</li>
+          <li>Error states and recovery patterns.</li>
+          <li>Form validation rules.</li>
+          <li>Detailed booking flow rules.</li>
+          <li>Copywriting guidelines and tone of voice.</li>
+          <li>Ownership of the document.</li>
+          <li>Versioning and update process.</li>
+          <li>Rules for missing content, such as absent images or incomplete event metadata.</li>
+          <li>Permissions, location fallback, and empty map behavior.</li>
+          <li>Saved, favorited, or selected states where relevant.</li>
+          <li>Analytics, tracking, and product measurement requirements.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="footer">
+      <p>Prepared as a single HTML document so it can be opened in any modern browser, reviewed locally, and uploaded directly to GitHub.</p>
+    </section>
+  </main>
+</body>
+</html>
